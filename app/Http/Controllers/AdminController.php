@@ -109,4 +109,8 @@ class AdminController extends Controller
         $users = User::all();
         return view('admin.users',get_defined_vars());
     }
+    public function UsersEdit($id){
+         $user = User::find($id);
+         return view('admin.edit-user',get_defined_vars());
+    }
 }
