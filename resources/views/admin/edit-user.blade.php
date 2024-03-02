@@ -66,40 +66,48 @@
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <table style="width:100%">
-                                        <tr>
-                                            <th>SL</th>
-                                            <th>Name</th>
-                                            <th>Country</th>
-                                            <th>City</th>
-                                            <th>Phone</th>
-                                            <th>Email</th>
-                                            <th>User Type</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        @foreach ($users as $user)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $user->first_name }} {{ $user->last_name }}</td>
-                                                <td>{{ $user->country }}</td>
-                                                <td>{{ $user->city }}</td>
-                                                <td>{{ $user->phone_number }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>
-                                                    @if ($user->user_type == 1)
-                                                    {{ 'Admin' }}
-                                                    @else
-                                                        {{ 'Member' }}
-                                                    @endif
-                                                   
-                                                </td>
-                                                <td> <a href="{{ route('user-edit',$user->id) }}">Edit</a></td>
-                                                @if ($user->user_type != 1)
-                                                <td> <a href="">Delete</a></td>
-                                                @endif
-                                            </tr>
-                                        @endforeach
-                                    </table>
+                                    {{-- @php
+                                        if (isset($blog)) {
+                                            $action = '/blogs/single-blogs/edit-blog' . '/' . $blog->id;
+                                        } else {
+                                            $action = '/blogs/add-blog';
+                                        }
+                                    @endphp --}}
+
+                                    <form method="POST" action="" class="contactForm"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="label" for="name">First Name</label>
+                                                    <input type="text" class="form-control" name="first_name"
+                                                        id="first_name" placeholder="User name" 
+                                                        value="{{ old('first_name', $user->first_name ?? null) }}">
+                                                    @error('first_name')
+                                                        <span class="text-12 text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="label" for="name">Last Name</label>
+                                                    <input type="text" class="form-control" name="last_name"
+                                                        id="last_name" placeholder="User name" 
+                                                        value="{{ old('last_name', $user->last_name ?? null) }}">
+                                                    @error('last_name')
+                                                        <span class="text-12 text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                           
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="submit" value="Submit" class="btn btn-primary">
+                                                    <div class="submitting"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

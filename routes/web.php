@@ -52,6 +52,7 @@ Route::middleware(['admin', "auth"])->group(function () {
         ->name('destroy_blog');
            //Users List
     Route::get('/users', [AdminController::class, 'UsersList'])->name('users');
+    Route::get('/user-edit/{id}', [AdminController::class, 'UsersEdit'])->name('user-edit');
 });
 
 //authentification
